@@ -34,8 +34,8 @@ async def perguntar_groq(user_id, pergunta):
     texto = resposta.choices[0].message.content
     historicos[user_id].append({"role": "assistant", "content": texto})
     
-    if len(historicos[user_id]) > 20:
-        historicos[user_id] = historicos[user_id][-20:]
+    if len(historicos[user_id]) > 100:
+        historicos[user_id] = historicos[user_id][-100:]
     
     return texto
 
