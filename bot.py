@@ -25,16 +25,16 @@ async def perguntar_groq(user_id, pergunta):
     historicos[user_id].append({"role": "user", "content": pergunta})
     
     resposta = groq.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        max_tokens=300,
+        model="compound-beta",
+        max_tokens=700,
         messages=[{"role": "system", "content": PERSONALIDADE}] + historicos[user_id]
     )
     
     texto = resposta.choices[0].message.content
     historicos[user_id].append({"role": "assistant", "content": texto})
     
-    if len(historicos[user_id]) > 500:
-        historicos[user_id] = historicos[user_id][-500:]
+    if len(historicos[user_id]) > 700:
+        historicos[user_id] = historicos[user_id][-700:]
     
     return texto
 
