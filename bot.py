@@ -63,13 +63,21 @@ async def on_message(message):
         
     elif message.content.startswith(f"{PREFIXO}pivoz "):
         pergunta = message.content[len(f"{PREFIXO}pivoz "):]
+        print(f"Pivoz recebido: {pergunta}")
+        vc = message.guild.voice_client
         if not vc:
             await message.channel.send("Me chama pra call primeiro com `!entrar`!")
             return
-        texto = await perguntar_groq(pergunta)
-        tts = gTTS(text=texto, lang="pt")
-        tts.save("resposta.mp3")
-        if not vc.is_playing():
-            vc.play(discord.FFmpegPCMAudio("resposta.mp3"))
+        try:
+            texto = await perguntar_groq(pergunta)
+            print(f"Resposta pivoz: {texto}")
+            await message.channel.send(f"🎙️ {texto}")
+            tts = gTTS(text=texto, lang="pt")
+            tts.save("resposta.mp3")
+            if not vc.is_playing():
+                vc.play(discord.FFmpegPCMAudio("resposta.mp3"))
+        except Exception as e:
+            print(f"ERRO pivoz: {e}")
+            await message.channel.send(f"Erro: {e}")
 
 client.run(DISCORD_TOKEN)
