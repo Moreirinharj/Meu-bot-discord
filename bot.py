@@ -52,6 +52,14 @@ async def on_message(message):
 
     elif message.content.startswith(f"{PREFIXO}pi "):
         pergunta = message.content[len(f"{PREFIXO}pi "):]
+        print(f"Pergunta: {pergunta}")
+        try:
+            texto = await perguntar_groq(pergunta)
+            print(f"Resposta: {texto}")
+            await message.channel.send(f"🤖 {texto}")
+        except Exception as e:
+            print(f"ERRO: {e}")
+            await message.channel.send(f"Erro: {e}")
         
     elif message.content.startswith(f"{PREFIXO}pivoz "):
         pergunta = message.content[len(f"{PREFIXO}pivoz "):]
