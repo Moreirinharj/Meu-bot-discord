@@ -1,3 +1,8 @@
+import subprocess
+import sys
+
+subprocess.run(["apt-get", "install", "-y", "ffmpeg"], capture_output=True)
+
 import discord
 from groq import Groq
 from gtts import gTTS
