@@ -87,4 +87,12 @@ async def on_message(message):
         except Exception as e:
             await message.channel.send(f"Erro: {e}")
 
-client.run(DISCORD_TOKEN)
+import time
+
+while True:
+    try:
+        client.run(DISCORD_TOKEN)
+    except Exception as e:
+        print(f"Erro: {e}")
+        print("Aguardando 30 segundos antes de reconectar...")
+        time.sleep(30)
