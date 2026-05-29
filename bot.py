@@ -35,6 +35,7 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
+    print(f"Mensagem recebida: {message.content}")
 
     if message.content == f"{PREFIXO}entrar":
         if message.author.voice:
