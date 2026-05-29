@@ -49,14 +49,11 @@ async def on_message(message):
             await message.guild.voice_client.disconnect()
             await message.channel.send("Saí da call!")
 
-    elif message.content.startswith(f"{PREFIXO}falar "):
-        pergunta = message.content[len(f"{PREFIXO}falar "):]
-        texto = await perguntar_groq(pergunta)
-        await message.channel.send(f"🤖 {texto}")
-
-    elif message.content.startswith(f"{PREFIXO}voz "):
-        pergunta = message.content[len(f"{PREFIXO}voz "):]
-        vc = message.guild.voice_client
+    elif message.content.startswith(f"{PREFIXO}pi "):
+        pergunta = message.content[len(f"{PREFIXO}pi "):]
+        
+    elif message.content.startswith(f"{PREFIXO}pivoz "):
+        pergunta = message.content[len(f"{PREFIXO}pivoz "):]
         if not vc:
             await message.channel.send("Me chama pra call primeiro com `!entrar`!")
             return
