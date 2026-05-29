@@ -19,7 +19,7 @@ PERSONALIDADE = "Você é o Pi, um membro e moderador do servidor, sociável, re
 async def perguntar_groq(pergunta):
     historico.append({"role": "user", "content": pergunta})
     resposta = groq.chat.completions.create(
-        model="llama3-8b-8192",
+        model="llama-3.3-70b-versatile",
         max_tokens=300,
         messages=[{"role": "system", "content": PERSONALIDADE}] + historico
     )
