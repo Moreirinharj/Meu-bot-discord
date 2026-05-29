@@ -69,10 +69,15 @@ async def on_message(message):
         pergunta = message.content[len(f"{PREFIXO}pi "):]
         try:
             texto = await perguntar_groq(user_id, pergunta)
-            await message.channel.send(f"🤖 {texto}")
+            if len(texto) > 1900:
+                partes = [texto[i:i+1900] for i in range(0, len(texto), 1900)]
+                for parte in partes:
+                    await message.channel.send(f"🤖 {parte}")
+            else:
+                await message.channel.send(f"🤖 {texto}")
         except Exception as e:
             await message.channel.send(f"Erro: {e}")
-
+            
     elif message.content.startswith(f"{PREFIXO}pivoz "):
         pergunta = message.content[len(f"{PREFIXO}pivoz "):]
         vc = message.guild.voice_client
